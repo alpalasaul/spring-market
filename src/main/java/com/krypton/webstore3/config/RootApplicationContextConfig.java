@@ -1,4 +1,5 @@
 package com.krypton.webstore3.config;
+
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,16 +13,15 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 @ComponentScan("com.krypton.webstore3")
 public class RootApplicationContextConfig {
 
-@Bean
-public DataSource dataSource() {
-    EmbeddedDatabaseBuilder builder = new
-    EmbeddedDatabaseBuilder();
-    EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.HSQL).addScript("db/sql/create-table.sql").addScript("db/sql/insert-data.sql").build();
-    return db;
-}
+    @Bean
+    public DataSource dataSource() {
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.HSQL).addScript("db/sql/create-table.sql").addScript("db/sql/insert-data.sql").build();
+        return db;
+    }
 
-@Bean
-public NamedParameterJdbcTemplate getJdbcTemplate() {
-    return new NamedParameterJdbcTemplate(dataSource());
+    @Bean
+    public NamedParameterJdbcTemplate getJdbcTemplate() {
+        return new NamedParameterJdbcTemplate(dataSource());
     }
 }
