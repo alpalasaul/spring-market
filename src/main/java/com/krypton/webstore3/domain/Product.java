@@ -1,9 +1,13 @@
 package com.krypton.webstore3.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
+@XmlRootElement
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 3678107792576131001L;
@@ -17,6 +21,8 @@ public class Product implements Serializable {
     private long unitsInOrder;
     private boolean discontinued;
     private String condition;
+
+    @JsonIgnore
     private MultipartFile productImage;
 
     public Product() {
@@ -114,6 +120,7 @@ public class Product implements Serializable {
         this.productImage = productImage;
     }
 
+    @XmlTransient
     public MultipartFile getProductImage() {
         return productImage;
     }
