@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.krypton.webstore3.domain.Product;
 import com.krypton.webstore3.domain.repository.ProductRepository;
+import org.springframework.web.multipart.MultipartFile;
 
 @Repository
 public class InMemoryProductRepository implements ProductRepository{
@@ -38,6 +39,7 @@ private static final class ProductMapper implements RowMapper<Product> {
         product.setUnitsInStock(rs.getLong("UNITS_IN_STOCK"));
         product.setUnitsInOrder(rs.getLong("UNITS_IN_ORDER"));
         product.setDiscontinued(rs.getBoolean("DISCONTINUED"));
+//        product.setProductImage();
         return product;
 }
     
