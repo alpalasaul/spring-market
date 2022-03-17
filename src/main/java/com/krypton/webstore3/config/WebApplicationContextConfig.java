@@ -107,6 +107,17 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new ProcessingTimeLogInterceptor());
 
+        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("language");
+        registry.addInterceptor(localeChangeInterceptor);
+
+    }
+
+    @Bean
+    public LocaleResolver localeResolver() {
+        SessionLocaleResolver resolver = new SessionLocaleResolver();
+        resolver.setDefaultLocale(new Locale("en"));
+        return resolver;
     }
 
 }
