@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.krypton.webstore3.domain.Product;
 import java.io.File;
 import java.util.List;
+import javax.validation.Valid;
 
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +65,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products/add", method = RequestMethod.POST)
-    public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct, BindingResult result, HttpServletRequest request) {
+    public String processAddNewProductForm(@ModelAttribute("newProduct")
+            @Valid Product newProduct, BindingResult result, HttpServletRequest request) {
 
         String[] suppressedFields = result.getSuppressedFields();
         if (suppressedFields.length > 0) {
@@ -79,6 +81,11 @@ public class ProductController {
             } catch (Exception e) {
                 throw new RuntimeException("Product Image saving failed", e);
             }
+
+        }
+
+        if (result.hasErrors()) {
+            return "addProduct";
         }
 
         productService.addProduct(newProduct);
@@ -95,7 +102,13 @@ public class ProductController {
                 "category",
                 "unitsInStock",
                 "condition",
-                "productImage");
+                "productImage",
+                "language");
+    }
+
+    @RequestMapping("/products/invalidPromoCode")
+    public String invalidPromoCode() {
+        return "invalidPromoCode";
     }
 
 }
