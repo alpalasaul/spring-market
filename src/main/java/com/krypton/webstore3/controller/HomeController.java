@@ -11,9 +11,9 @@ public class HomeController {
     public String welcome(Model model) {
         model.addAttribute("greeting", "Welcome to Web Store!");
         model.addAttribute("tagline", "The one and only amazing web store");
-        //return "welcome";
-        return "forward:/welcome/greeting"; // redirije a otro método del controller para que atienda la solicitud
-//     return "redirect:/welcome/greeting"; // redirije a la vista
+//        return "welcome"; // es igual que redirect:/welcome/greeting
+        return "forward:/welcome/greeting"; // trasladada los datos de una solicitud a otra, JSP a otro, y así.
+//     return "redirect:/welcome/greeting"; // redirije a una nueva solicitud totalmente diferente [pierde los datos]
 
     }
 
